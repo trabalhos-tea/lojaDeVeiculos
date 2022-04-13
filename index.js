@@ -2,10 +2,9 @@ const express = require("express");
 const app = express();
 const router = require("./router.js");
 const mongoose = require("mongoose");
-const port = 3000;
 
 try {
-    mongoose.connect("mongodb+srv://leonardo951:vgb12vgb12@cluster0.bmovc.mongodb.net/vehicleShop?retryWrites=true&w=majority", {
+    mongoose.connect(process.env.DB_SERVER, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
@@ -16,8 +15,8 @@ try {
 app.use(express.json());
 app.use(router);
 
-app.listen(port, () => {
-    console.log("Server is running at localhost: ", port);
+app.listen(process.env.SYSTEM_PORT, () => {
+    console.log("Server is running at localhost: ", process.env.SYSTEM_PORT);
 });
 
 module.exports = app;
